@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .user-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            max-width: 400px;
+        }
+        .user-card img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+        }
+        .user-card h2 {
+            margin: 0 0 10px;
+        }
+        .user-card p {
+            margin: 5px 0;
+        }
+        .user-card .rating {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Information</h1>
+    {% for username, user in user_data.items() %}
+    <div class="user-card">
+        <img src="{{ user.result[0].avatar }}" alt="Avatar">
+        <h2>{{ user.result[0].handle }}</h2>
+        <p><strong>Rank:</strong> {{ user.result[0].rank }}</p>
+        <p><strong>Rating:</strong> <span class="rating">{{ user.result[0].rating }}</span></p>
+        <p><strong>Max Rating:</strong> {{ user.result[0].maxRating }}</p>
+        <p><strong>Last Online:</strong> {{ user.result[0].lastOnlineTimeSeconds | to_datetime }}</p>
+        <p><strong>Registration Time:</strong> {{ user.result[0].registrationTimeSeconds | to_datetime }}</p>
+        <p><strong>Friends Count:</strong> {{ user.result[0].friendOfCount }}</p>
+        <p><strong>Title Photo:</strong></p>
+        <img src="{{ user.result[0].titlePhoto }}" alt="Title Photo">
+    </div>
+    {% endfor %}
+</body>
+</html>
