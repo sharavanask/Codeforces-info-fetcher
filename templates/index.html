@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Information</title>
+    <title>CodeForces fetcher</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,19 +33,26 @@
     </style>
 </head>
 <body>
-    <h1>User Information</h1>
+    <h1 align="center">CodeForces Info Fetcher</h1>
     {% for username, user in user_data.items() %}
     <div class="user-card">
-        <img src="{{ user.result[0].avatar }}" alt="Avatar">
-        <h2>{{ user.result[0].handle }}</h2>
-        <p><strong>Rank:</strong> {{ user.result[0].rank }}</p>
-        <p><strong>Rating:</strong> <span class="rating">{{ user.result[0].rating }}</span></p>
-        <p><strong>Max Rating:</strong> {{ user.result[0].maxRating }}</p>
-        <p><strong>Last Online:</strong> {{ user.result[0].lastOnlineTimeSeconds | to_datetime }}</p>
-        <p><strong>Registration Time:</strong> {{ user.result[0].registrationTimeSeconds | to_datetime }}</p>
-        <p><strong>Friends Count:</strong> {{ user.result[0].friendOfCount }}</p>
+        <!-- <img src="{{ user.avatar }}" alt="Avatar"> -->
+        <h2>{{ user.handle }}</h2>
+        <p><strong>Rank:</strong> {{ user.rank }}</p>
+        <p><strong>Rating:</strong> <span class="rating">{{ user.rating }}</span></p>
+        <p><strong>Max Rating:</strong> {{ user.maxRating }}</p>
+        <p><strong>Last Online:</strong> {{ user.lastOnlineTimeSeconds | to_datetime }}</p>
+        <p><strong>Registration Time:</strong> {{ user.registrationTimeSeconds | to_datetime }}</p>
+        <p><strong>Friends Count:</strong> {{ user.friendOfCount }}</p>
         <p><strong>Title Photo:</strong></p>
-        <img src="{{ user.result[0].titlePhoto }}" alt="Title Photo">
+        <img src="{{ user.titlePhoto }}" alt="Title Photo">
+
+        {% if user.last_contest %}
+        <p><strong>Last Contest:</strong> {{ user.last_contest.contestName }}</p>
+        <p><strong>Problems Solved in Last Contest:</strong> {{ user.last_contest.problems_solved }}</p>
+        {% else %}
+        <p><strong>Last Contest:</strong> No contests participated yet.</p>
+        {% endif %}
     </div>
     {% endfor %}
 </body>
